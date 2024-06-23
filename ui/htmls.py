@@ -29,7 +29,7 @@ CSS = """
 }
 
 #md_project a {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 #md_project a:hover {
@@ -38,7 +38,7 @@ CSS = """
 """
 
 MARKDOWN = """
-### [Whisper Web-UI](https://github.com/jhj0517/Whsiper-WebUI)
+### [RTIS Whisper Web-UI](https://github.com/gimmw/Whisper-WebUI.git)
 """
 
 

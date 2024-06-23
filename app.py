@@ -60,11 +60,11 @@ class App:
                     with gr.Row():
                         input_file = gr.Files(type="filepath", label="Upload File here")
                     with gr.Row():
-                        dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="large-v2",
+                        dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="small.en",
                                                label="Model")
                         dd_lang = gr.Dropdown(choices=["Automatic Detection"] + self.whisper_inf.available_langs,
                                               value="Automatic Detection", label="Language")
-                        dd_file_format = gr.Dropdown(["SRT", "WebVTT", "txt"], value="SRT", label="File Format")
+                        dd_file_format = gr.Dropdown(["txt", "SRT", "WebVTT"], value="txt", label="File Format")
                     with gr.Row():
                         cb_translate = gr.Checkbox(value=False, label="Translate to English?", interactive=True)
                     with gr.Row():
@@ -89,11 +89,11 @@ class App:
                         sd_temperature = gr.Slider(label="Temperature", value=0, step=0.01, maximum=1.0, interactive=True)
                         nb_compression_ratio_threshold = gr.Number(label="Compression Ratio Threshold", value=2.4, interactive=True)
                     with gr.Row():
-                        btn_run = gr.Button("GENERATE SUBTITLE FILE", variant="primary")
+                        btn_run = gr.Button("GENERATE TRANSCRIPTION", variant="primary")
                     with gr.Row():
                         tb_indicator = gr.Textbox(label="Output", scale=5)
                         files_subtitles = gr.Files(label="Downloadable output file", scale=3, interactive=False)
-                        btn_openfolder = gr.Button('📂', scale=1)
+                       # btn_openfolder = gr.Button('📂', scale=1)
 
                     params = [input_file, dd_file_format, cb_timestamp]
                     whisper_params = WhisperGradioComponents(model_size=dd_model,
@@ -133,11 +133,11 @@ class App:
                             tb_title = gr.Label(label="Youtube Title")
                             tb_description = gr.Textbox(label="Youtube Description", max_lines=15)
                     with gr.Row():
-                        dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="large-v2",
+                        dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="small.en",
                                                label="Model")
                         dd_lang = gr.Dropdown(choices=["Automatic Detection"] + self.whisper_inf.available_langs,
                                               value="Automatic Detection", label="Language")
-                        dd_file_format = gr.Dropdown(choices=["SRT", "WebVTT", "txt"], value="SRT", label="File Format")
+                        dd_file_format = gr.Dropdown(choices=["SRT", "WebVTT", "txt"], value="txt", label="File Format")
                     with gr.Row():
                         cb_translate = gr.Checkbox(value=False, label="Translate to English?", interactive=True)
                     with gr.Row():
@@ -163,7 +163,7 @@ class App:
                         sd_temperature = gr.Slider(label="Temperature", value=0, step=0.01, maximum=1.0, interactive=True)
                         nb_compression_ratio_threshold = gr.Number(label="Compression Ratio Threshold", value=2.4, interactive=True)
                     with gr.Row():
-                        btn_run = gr.Button("GENERATE SUBTITLE FILE", variant="primary")
+                        btn_run = gr.Button("GENERATE TRANSCRIPTION", variant="primary")
                     with gr.Row():
                         tb_indicator = gr.Textbox(label="Output", scale=5)
                         files_subtitles = gr.Files(label="Downloadable output file", scale=3)
@@ -202,11 +202,11 @@ class App:
                     with gr.Row():
                         mic_input = gr.Microphone(label="Record with Mic", type="filepath", interactive=True)
                     with gr.Row():
-                        dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="large-v2",
+                        dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="small.en",
                                                label="Model")
                         dd_lang = gr.Dropdown(choices=["Automatic Detection"] + self.whisper_inf.available_langs,
                                               value="Automatic Detection", label="Language")
-                        dd_file_format = gr.Dropdown(["SRT", "WebVTT", "txt"], value="SRT", label="File Format")
+                        dd_file_format = gr.Dropdown(["SRT", "WebVTT", "txt"], value="txt", label="File Format")
                     with gr.Row():
                         cb_translate = gr.Checkbox(value=False, label="Translate to English?", interactive=True)
                     with gr.Accordion("VAD Options", open=False, visible=isinstance(self.whisper_inf, FasterWhisperInference)):
@@ -228,7 +228,7 @@ class App:
                         tb_initial_prompt = gr.Textbox(label="Initial Prompt", value=None, interactive=True)
                         sd_temperature = gr.Slider(label="Temperature", value=0, step=0.01, maximum=1.0, interactive=True)
                     with gr.Row():
-                        btn_run = gr.Button("GENERATE SUBTITLE FILE", variant="primary")
+                        btn_run = gr.Button("GENERATE TRANSCRIPTION", variant="primary")
                     with gr.Row():
                         tb_indicator = gr.Textbox(label="Output", scale=5)
                         files_subtitles = gr.Files(label="Downloadable output file", scale=3)
@@ -263,37 +263,8 @@ class App:
 
                 with gr.TabItem("T2T Translation"):  # tab 4
                     with gr.Row():
-                        file_subs = gr.Files(type="filepath", label="Upload Subtitle Files to translate here",
+                        file_subs = gr.Files(type="filepath", label="Upload Files to translate here",
                                              file_types=['.vtt', '.srt'])
-
-                    with gr.TabItem("DeepL API"):  # sub tab1
-                        with gr.Row():
-                            tb_authkey = gr.Textbox(label="Your Auth Key (API KEY)",
-                                                    value="")
-                        with gr.Row():
-                            dd_deepl_sourcelang = gr.Dropdown(label="Source Language", value="Automatic Detection",
-                                                              choices=list(
-                                                                  self.deepl_api.available_source_langs.keys()))
-                            dd_deepl_targetlang = gr.Dropdown(label="Target Language", value="English",
-                                                              choices=list(
-                                                                  self.deepl_api.available_target_langs.keys()))
-                        with gr.Row():
-                            cb_deepl_ispro = gr.Checkbox(label="Pro User?", value=False)
-                        with gr.Row():
-                            btn_run = gr.Button("TRANSLATE SUBTITLE FILE", variant="primary")
-                        with gr.Row():
-                            tb_indicator = gr.Textbox(label="Output", scale=5)
-                            files_subtitles = gr.Files(label="Downloadable output file", scale=3)
-                            btn_openfolder = gr.Button('📂', scale=1)
-
-                    btn_run.click(fn=self.deepl_api.translate_deepl,
-                                  inputs=[tb_authkey, file_subs, dd_deepl_sourcelang, dd_deepl_targetlang,
-                                          cb_deepl_ispro],
-                                  outputs=[tb_indicator, files_subtitles])
-
-                    btn_openfolder.click(fn=lambda: self.open_folder(os.path.join("outputs", "translations")),
-                                         inputs=None,
-                                         outputs=None)
 
                     with gr.TabItem("NLLB"):  # sub tab2
                         with gr.Row():
@@ -319,9 +290,38 @@ class App:
                                   inputs=[file_subs, dd_nllb_model, dd_nllb_sourcelang, dd_nllb_targetlang, cb_timestamp],
                                   outputs=[tb_indicator, files_subtitles])
 
-                    btn_openfolder.click(fn=lambda: self.open_folder(os.path.join("outputs", "translations")),
-                                         inputs=None,
-                                         outputs=None)
+                    #btn_openfolder.click(fn=lambda: self.open_folder(os.path.join("outputs", "translations")),
+                    #                     inputs=None,
+                    #                     outputs=None)
+                    with gr.TabItem("DeepL API"):  # sub tab1
+                        with gr.Row():
+                            tb_authkey = gr.Textbox(label="Your Auth Key (API KEY)",
+                                                    value="")
+                        with gr.Row():
+                            dd_deepl_sourcelang = gr.Dropdown(label="Source Language", value="Automatic Detection",
+                                                              choices=list(
+                                                                  self.deepl_api.available_source_langs.keys()))
+                            dd_deepl_targetlang = gr.Dropdown(label="Target Language", value="English",
+                                                              choices=list(
+                                                                  self.deepl_api.available_target_langs.keys()))
+                        with gr.Row():
+                            cb_deepl_ispro = gr.Checkbox(label="Pro User?", value=False)
+                        with gr.Row():
+                            btn_run = gr.Button("TRANSLATE SUBTITLE FILE", variant="primary")
+                        with gr.Row():
+                            tb_indicator = gr.Textbox(label="Output", scale=5)
+                            files_subtitles = gr.Files(label="Downloadable output file", scale=3)
+                            btn_openfolder = gr.Button('📂', scale=1)
+
+                    btn_run.click(fn=self.deepl_api.translate_deepl,
+                                  inputs=[tb_authkey, file_subs, dd_deepl_sourcelang, dd_deepl_targetlang,
+                                          cb_deepl_ispro],
+                                  outputs=[tb_indicator, files_subtitles])
+
+                    #btn_openfolder.click(fn=lambda: self.open_folder(os.path.join("outputs", "translations")),
+                    #                     inputs=None,
+                    #                     outputs=None)
+
 
         # Launch the app with optional gradio settings
         launch_args = {}
@@ -335,6 +335,8 @@ class App:
             launch_args['auth'] = (self.args.username, self.args.password)
         if self.args.root_path:
             launch_args['root_path'] = self.args.root_path
+        if self.args.debug:
+            launch_args['debug'] = True
         launch_args['inbrowser'] = True
 
         self.app.queue(api_open=False).launch(**launch_args)
@@ -351,6 +353,7 @@ parser.add_argument('--username', type=str, default=None, help='Gradio authentic
 parser.add_argument('--password', type=str, default=None, help='Gradio authentication password')
 parser.add_argument('--theme', type=str, default=None, help='Gradio Blocks theme')
 parser.add_argument('--colab', type=bool, default=False, nargs='?', const=True, help='Is colab user or not')
+parser.add_argument('--debug', type=bool, default=False, nargs='?', const=True, help='enable debug or not')
 parser.add_argument('--api_open', type=bool, default=False, nargs='?', const=True, help='enable api or not')
 parser.add_argument('--whisper_model_dir', type=str, default=os.path.join("models", "Whisper"), help='Directory path of the whisper model')
 parser.add_argument('--faster_whisper_model_dir', type=str, default=os.path.join("models", "Whisper", "faster-whisper"), help='Directory path of the faster-whisper model')

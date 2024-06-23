@@ -1,25 +1,7 @@
 # Whisper-WebUI
-A Gradio-based browser interface for [Whisper](https://github.com/openai/whisper). You can use it as an Easy Subtitle Generator!
+A Gradio-based browser interface for [Whisper](https://github.com/openai/whisper).
 
 ![Whisper WebUI](https://github.com/jhj0517/Whsiper-WebUI/blob/master/screenshot.png)
-
-## Notebook
-If you wish to try this on Colab, you can do it in [here](https://colab.research.google.com/github/jhj0517/Whisper-WebUI/blob/master/notebook/whisper-webui.ipynb)!
-
-# Feature
-- Generate subtitles from various sources, including :
-  - Files
-  - Youtube
-  - Microphone
-- Currently supported subtitle formats : 
-  - SRT
-  - WebVTT
-  - txt ( only text file without timeline )
-- Speech to Text Translation 
-  - From other languages to English. ( This is Whisper's end-to-end speech-to-text translation feature )
-- Text to Text Translation
-  - Translate subtitle files using Facebook NLLB models
-  - Translate subtitle files using DeepL API
 
 # Installation and Running
 ### Prerequisite
