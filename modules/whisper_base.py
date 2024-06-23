@@ -58,9 +58,9 @@ class WhisperBase(ABC):
         files: list
             List of files to transcribe from gr.Files()
         file_format: str
-            Subtitle File format to write from gr.Dropdown(). Supported format: [SRT, WebVTT, txt]
+            File format to write from gr.Dropdown(). Supported format: [SRT, WebVTT, txt]
         add_timestamp: bool
-            Boolean value from gr.Checkbox() that determines whether to add a timestamp at the end of the subtitle filename.
+            Boolean value from gr.Checkbox() that determines whether to add a timestamp at the end of the filename.
         progress: gr.Progress
             Indicator to show progress directly in gradio.
         *whisper_params: tuple
@@ -100,7 +100,7 @@ class WhisperBase(ABC):
                 total_result += f'{info["subtitle"]}'
                 total_time += info["time_for_task"]
 
-            result_str = f"Done in {self.format_time(total_time)}! Subtitle is in the outputs folder.\n\n{total_result}"
+            result_str = f"Done in {self.format_time(total_time)}! Transcription is in the outputs folder.\n\n{total_result}"
             result_file_path = [info['path'] for info in files_info.values()]
 
             return [result_str, result_file_path]
@@ -155,7 +155,7 @@ class WhisperBase(ABC):
                 file_format=file_format
             )
 
-            result_str = f"Done in {self.format_time(time_for_task)}! Subtitle file is in the outputs folder.\n\n{subtitle}"
+            result_str = f"Done in {self.format_time(time_for_task)}! Transcription file is in the outputs folder.\n\n{subtitle}"
             return [result_str, result_file_path]
         except Exception as e:
             print(f"Error transcribing file: {e}")

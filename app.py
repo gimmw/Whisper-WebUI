@@ -120,7 +120,7 @@ class App:
                     btn_run.click(fn=self.whisper_inf.transcribe_file,
                                   inputs=params + whisper_params.to_list(),
                                   outputs=[tb_indicator, files_subtitles])
-                    btn_openfolder.click(fn=lambda: self.open_folder("outputs"), inputs=None, outputs=None)
+                    #btn_openfolder.click(fn=lambda: self.open_folder("outputs"), inputs=None, outputs=None)
                     dd_model.change(fn=self.on_change_models, inputs=[dd_model], outputs=[cb_translate])
 
                 with gr.TabItem("Youtube"):  # tab2
@@ -167,7 +167,7 @@ class App:
                     with gr.Row():
                         tb_indicator = gr.Textbox(label="Output", scale=5)
                         files_subtitles = gr.Files(label="Downloadable output file", scale=3)
-                        btn_openfolder = gr.Button('📂', scale=1)
+                        #btn_openfolder = gr.Button('📂', scale=1)
 
                     params = [tb_youtubelink, dd_file_format, cb_timestamp]
                     whisper_params = WhisperGradioComponents(model_size=dd_model,
@@ -195,7 +195,7 @@ class App:
                                   outputs=[tb_indicator, files_subtitles])
                     tb_youtubelink.change(get_ytmetas, inputs=[tb_youtubelink],
                                           outputs=[img_thumbnail, tb_title, tb_description])
-                    btn_openfolder.click(fn=lambda: self.open_folder("outputs"), inputs=None, outputs=None)
+                    #btn_openfolder.click(fn=lambda: self.open_folder("outputs"), inputs=None, outputs=None)
                     dd_model.change(fn=self.on_change_models, inputs=[dd_model], outputs=[cb_translate])
 
                 with gr.TabItem("Mic"):  # tab3
@@ -232,7 +232,7 @@ class App:
                     with gr.Row():
                         tb_indicator = gr.Textbox(label="Output", scale=5)
                         files_subtitles = gr.Files(label="Downloadable output file", scale=3)
-                        btn_openfolder = gr.Button('📂', scale=1)
+                        #btn_openfolder = gr.Button('📂', scale=1)
 
                     params = [mic_input, dd_file_format]
                     whisper_params = WhisperGradioComponents(model_size=dd_model,
@@ -258,7 +258,7 @@ class App:
                     btn_run.click(fn=self.whisper_inf.transcribe_mic,
                                   inputs=params + whisper_params.to_list(),
                                   outputs=[tb_indicator, files_subtitles])
-                    btn_openfolder.click(fn=lambda: self.open_folder("outputs"), inputs=None, outputs=None)
+                    #btn_openfolder.click(fn=lambda: self.open_folder("outputs"), inputs=None, outputs=None)
                     dd_model.change(fn=self.on_change_models, inputs=[dd_model], outputs=[cb_translate])
 
                 with gr.TabItem("T2T Translation"):  # tab 4
@@ -278,11 +278,11 @@ class App:
                             cb_timestamp = gr.Checkbox(value=True, label="Add a timestamp to the end of the filename",
                                                        interactive=True)
                         with gr.Row():
-                            btn_run = gr.Button("TRANSLATE SUBTITLE FILE", variant="primary")
+                            btn_run = gr.Button("TRANSLATE FILE", variant="primary")
                         with gr.Row():
                             tb_indicator = gr.Textbox(label="Output", scale=5)
                             files_subtitles = gr.Files(label="Downloadable output file", scale=3)
-                            btn_openfolder = gr.Button('📂', scale=1)
+                            #btn_openfolder = gr.Button('📂', scale=1)
                         with gr.Column():
                             md_vram_table = gr.HTML(NLLB_VRAM_TABLE, elem_id="md_nllb_vram_table")
 
@@ -311,7 +311,7 @@ class App:
                         with gr.Row():
                             tb_indicator = gr.Textbox(label="Output", scale=5)
                             files_subtitles = gr.Files(label="Downloadable output file", scale=3)
-                            btn_openfolder = gr.Button('📂', scale=1)
+                            #btn_openfolder = gr.Button('📂', scale=1)
 
                     btn_run.click(fn=self.deepl_api.translate_deepl,
                                   inputs=[tb_authkey, file_subs, dd_deepl_sourcelang, dd_deepl_targetlang,
